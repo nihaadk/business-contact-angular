@@ -44,4 +44,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+  filterCategory(category){
+
+  }
+
 }

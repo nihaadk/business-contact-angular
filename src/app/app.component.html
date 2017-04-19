@@ -15,12 +15,11 @@
               <div class="clearfix"></div>
             </div>
             <div class="panel-body">
+              <p><b>Category:</b> {{ business.category }}</p>
+              <p><b>Years in Business:</b> {{ business.years_in_business }}</p>
+              <p>{{ business.description }}</p>
+              <br/>
               <ul class="list-group">
-                <li class="list-group-item"><b>Category:</b> {{ business.category }}</li>
-                <li class="list-group-item"><b>Years in Business:</b> {{ business.years_in_business }}</li>
-                <br/>
-                <li class="list-group-item">{{ business.description }}</li>
-                <br/>
                 <li class="list-group-item"><b>Phone:</b> {{ business.phone }}</li>
                 <li class="list-group-item"><b>Email:</b> {{ business.email }}</li>
                 <li class="list-group-item"><b>Street:</b> {{ business.street_adress }}</li>
@@ -33,6 +32,26 @@
       </div>
     </div>
   </div>
+
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <button type="button" class="btn btn-default">Add Business</button>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="form-group">
+        <label>Filter Category
+          <select class="form-control" (change)="filterCategory(filteredCategory.value)" #filteredCategory>
+            <option value="0">Select</option>
+            <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
+          </select>
+        </label>
+
+
+      </div>
+    </div>
+  </div>
+
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div *ngIf="businesses">
