@@ -1,3 +1,62 @@
-<h1>
-  {{title}}
-</h1>
+<app-header></app-header>
+<div class="container">
+
+  <div *ngIf="appState == 'extend'">
+    <div class="row">
+      <div *ngFor="let business of businesses">
+        <div *ngIf="activeKey == business.$key">
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+              <h3 class="panel-title pull-left">
+                {{ business.company }}
+              </h3>
+              <button class="btn btn-default pull-right" (click)="changeState('default')">Go back</button>
+              <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item"><b>Category:</b> {{ business.category }}</li>
+                <li class="list-group-item"><b>Years in Business:</b> {{ business.years_in_business }}</li>
+                <br/>
+                <li class="list-group-item">{{ business.description }}</li>
+                <br/>
+                <li class="list-group-item"><b>Phone:</b> {{ business.phone }}</li>
+                <li class="list-group-item"><b>Email:</b> {{ business.email }}</li>
+                <li class="list-group-item"><b>Street:</b> {{ business.street_adress }}</li>
+                <li class="list-group-item"><b>City:</b> {{ business.city }}</li>
+                <li class="list-group-item"><b>Zipcode:</b> {{ business.zipcode }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div *ngIf="businesses">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let business of businesses">
+            <td>{{ business.company }}</td>
+            <td>{{ business.category }}</td>
+            <td>{{ business.phone }}</td>
+            <td>
+              <button (click)="changeState('extend', business.$key)" type="button" class="btn btn-primary">More</button>
+              <button type="button" class="btn btn-warning">Edit</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
