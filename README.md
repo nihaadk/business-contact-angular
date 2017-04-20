@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # FirebaseContactsDemo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
@@ -31,3 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # business-contact-ng
 Business Contact Angular App
 >>>>>>> 29b424f9ce7eec243e1321b3e42487c644638055
+=======
+
+# Business Contact Angular App with Firebase
+>>>>>>> 4cbe6f457dcb49b4fe4e1746d6ed296bac276382

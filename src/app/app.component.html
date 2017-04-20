@@ -15,11 +15,20 @@
               <div class="clearfix"></div>
             </div>
             <div class="panel-body">
+<<<<<<< HEAD
               <p><b>Category:</b> {{ business.category }}</p>
               <p><b>Years in Business:</b> {{ business.years_in_business }}</p>
               <p>{{ business.description }}</p>
               <br/>
               <ul class="list-group">
+=======
+              <ul class="list-group">
+                <li class="list-group-item"><b>Category:</b> {{ business.category }}</li>
+                <li class="list-group-item"><b>Years in Business:</b> {{ business.years_in_business }}</li>
+                <br/>
+                <li class="list-group-item">{{ business.description }}</li>
+                <br/>
+>>>>>>> 4cbe6f457dcb49b4fe4e1746d6ed296bac276382
                 <li class="list-group-item"><b>Phone:</b> {{ business.phone }}</li>
                 <li class="list-group-item"><b>Email:</b> {{ business.email }}</li>
                 <li class="list-group-item"><b>Street:</b> {{ business.street_adress }}</li>
@@ -33,6 +42,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
 
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -41,14 +51,76 @@
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <div class="form-group">
         <label>Filter Category
+=======
+  <div *ngIf="appState == 'add'" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h3>Add Business</h3>
+
+      <form (submit)="addBusiness(
+        company.value,
+        category.value,
+        years_in_business.value,
+        description.value,
+        phone.value,
+        email.value,
+        street_address.value,
+        city.value,
+        state.value,
+        zipcode.value)">
+
+        <div class="form-group">
+          <label for="">Company</label>
+          <input type="text" class="form-control" #company>
+        </div>
+
+        <div class="form-group">
+          <label for="">Category</label>
+          <select #category class="selectpicker">
+            <option value="0">Select</option>
+            <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="">Company</label>
+          <input type="text" class="form-control" #company>
+        </div>
+
+        <div class="form-group">
+          <label for="">Company</label>
+          <input type="text" class="form-control" #company>
+        </div>
+
+        <div class="form-group">
+          <label for="">Company</label>
+          <input type="text" class="form-control" #company>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <button type="button" class="btn btn-primary" (click)="changeState('add')">Add Business</button>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <label>Filter Category
+>>>>>>> 4cbe6f457dcb49b4fe4e1746d6ed296bac276382
           <select class="form-control" (change)="filterCategory(filteredCategory.value)" #filteredCategory>
             <option value="0">Select</option>
             <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
           </select>
         </label>
+<<<<<<< HEAD
 
 
       </div>
+=======
+>>>>>>> 4cbe6f457dcb49b4fe4e1746d6ed296bac276382
     </div>
   </div>
 
