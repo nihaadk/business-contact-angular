@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
 
     this._fs.updateBusiness(this.activeKey, updBusiness);
     console.log(updBusiness);
-    //this.changeState('default', 0);
+    this.changeState('default', 0);
   }
 
   remove(business) {
