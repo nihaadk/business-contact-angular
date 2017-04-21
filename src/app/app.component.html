@@ -38,7 +38,73 @@
     </div>
   </div>
 
+  <div *ngIf="appState == 'edit'" class="row">
+     <button class="btn btn-default pull-right" (click)="changeState('default')">Go back</button>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h3>Edit Business</h3>
+
+      <form (submit)="updateBusiness()">
+
+        <div class="form-group">
+          <label for="">Compa</label>
+          <input type="text" [(ngModel)]="activeCompany" name="activeCompany" class="form-control" #company>
+        </div>
+
+        <div class="form-group">
+          <label for="">Category</label>
+          <select #category class="form-control" name="activeCategory" [(ngModel)]="activeCategory">
+            <option value="0">Select</option>
+            <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="">Years in Business</label>
+          <input type="text" [(ngModel)]="activeYears_in_business" name="activeYears_in_business" class="form-control" #years_in_business>
+        </div>
+
+        <div class="form-group">
+          <label for="">Description</label>
+          <input type="text" [(ngModel)]="activeDescription" name="activeDescription" class="form-control" #description>
+        </div>
+
+        <div class="form-group">
+          <label for="">Phone</label>
+          <input type="text" [(ngModel)]="activePhone" name="activePhone" class="form-control" #phone>
+        </div>
+
+        <div class="form-group">
+          <label for="">Email</label>
+          <input type="text" [(ngModel)]="activeEmail" name="activeEmail" class="form-control" #email>
+        </div>
+
+        <div class="form-group">
+          <label for="">Street address</label>
+          <input type="text" [(ngModel)]="activeStreet_address" name="activeStreet_address" class="form-control" #street_address>
+        </div>
+
+        <div class="form-group">
+          <label for="">City</label>
+          <input type="text" [(ngModel)]="activeCity" name="activeCity" class="form-control" #city>
+        </div>
+
+        <div class="form-group">
+          <label for="">State</label>
+          <input type="text" [(ngModel)]="activeState" name="activeState" class="form-control" #state>
+        </div>
+
+        <div class="form-group">
+          <label for="">Zipcode</label>
+          <input type="text" [(ngModel)]="activeZipcode" name="activeZipcode" class="form-control" #zipcode>
+        </div>
+
+        <button type="submit" class="pull-right btn btn-success btn-md">Save</button>
+      </form>
+    </div>
+  </div>
+
   <div *ngIf="appState == 'add'" class="row">
+     <button class="btn btn-default pull-right" (click)="changeState('default')">Go back</button>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <h3>Add Business</h3>
 
@@ -148,8 +214,8 @@
             <td>{{ business.phone }}</td>
             <td>
               <button (click)="changeState('extend', business.$key)" type="button" class="btn btn-primary">More</button>
-              <button type="button" class="btn btn-warning">Edit</button>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <button (click)="showEdit(business)" type="button" class="btn btn-warning">Edit</button>
+              <button (click)="remove(business)" type="button" class="btn btn-danger">Delete</button>
             </td>
           </tr>
         </tbody>

@@ -16,6 +16,17 @@ export class AppComponent implements OnInit {
   appState: string;
   activeKey: string;
 
+  activeCompany: string;
+  activeCategory: string;
+  activeYears_in_business: string;
+  activeDescription: string;
+  activePhone: string;
+  activeEmail: string;
+  activeStreet_address: string;
+  activeCity: string;
+  activeState: string;
+  activeZipcode: string;
+
   constructor(private _fs: FirebaseService) {
   }
 
@@ -46,8 +57,65 @@ export class AppComponent implements OnInit {
     });
   }
 
-  addBusiness(company: string, category: string, years_in_business: string, description: string, phone: string, email: string, street_address: string, city: string, state: string, zipcode: string){
-    console.log(company+" "+years_in_business+" "+description+" "+phone+" "+email+" "+street_address+" "+city+" "+state+" "+zipcode);
+  addBusiness(company: string, category: string, years_in_business: string, description: string, phone: string, email: string, street_address: string, city: string, state: string, zipcode: string) {
+
+    var created_at = new Date().toString();
+    var newBusiness = {
+      company: company,
+      category: category,
+      years_in_business: years_in_business,
+      description: description,
+      phone: phone,
+      email: email,
+      street_address: street_address,
+      city: city,
+      state: state,
+      zipcode: zipcode,
+      created_at: created_at
+    }
+
+    this._fs.addBusiness(newBusiness);
+    this.changeState('default', 0);
   }
+
+  showEdit(business) {
+    this.changeState('edit', business.$key);
+    this.activeCompany = business.company;
+    this.activeCategory = business.category;
+    this.activeYears_in_business = business.years_in_business;
+    this.activeDescription = business.description;
+    this.activePhone = business.phone;
+    this.activeEmail = business.email;
+    this.activeStreet_address = business.street_address;
+    this.activeCity = business.city;
+    this.activeState = business.state;
+    this.activeZipcode = business.zipcode;
+  }
+
+  updateBusiness() {
+    var updated_at = new Date().toString();
+    var updBusiness = {
+      company: this.activeCompany,
+      category: this.activeCategory,
+      years_in_business: this.activeYears_in_business,
+      description: this.activeDescription,
+      phone: this.activePhone,
+      email: this.activeEmail,
+      street_address: this.activeStreet_address,
+      city: this.activeCity,
+      state: this.activeState,
+      zipcode: this.activeZipcode,
+      created_at: updated_at
+    }
+
+    this._fs.updateBusiness(this.activeKey, updBusiness);
+    console.log(updBusiness);
+    //this.changeState('default', 0);
+  }
+
+  remove(business) {
+    this._fs.removeBusiness(business);
+  }
+
 
 }
