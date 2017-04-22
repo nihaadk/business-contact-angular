@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
-import { HeaderComponent } from './header/header.component';
 
 
 // Must export the config
@@ -22,8 +21,7 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

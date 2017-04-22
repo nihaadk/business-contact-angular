@@ -1,36 +1,56 @@
-<app-header></app-header>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        Business Contacts
+      </a>
+    </div>
+    <div class="navbar-form navbar-left">
+      <button type="button" class="btn btn-primary" (click)="changeState('add')">Add Business</button>
+    </div>
+    <div class="navbar-form navbar-right">
+      <div class="form-group">
+        <label>Filter: 
+          <select class="form-control" (change)="filterCategory(filteredCategory.value)" #filteredCategory>
+            <option value="0">All</option>
+            <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+</nav>
 <div class="container">
 
+  <!-- detial contact -->
   <div *ngIf="appState == 'extend'">
     <div class="row">
       <div *ngFor="let business of businesses">
         <div *ngIf="activeKey == business.$key">
-          <div class="panel panel-default">
+          <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title pull-left">
-                {{ business.company }}
-              </h3>
-              <button class="btn btn-default pull-right" (click)="changeState('default')">Go back</button>
+              <h4 class="panel-title pull-left">
+                Detail of Contact
+              </h4>
+              <button class="btn btn-danger pull-right" (click)="changeState('default')">Cancel</button>
               <div class="clearfix"></div>
             </div>
             <div class="panel-body">
-
-              <p><b>Category:</b> {{ business.category }}</p>
-              <p><b>Years in Business:</b> {{ business.years_in_business }}</p>
-              <p>{{ business.description }}</p>
-              <br/>
-              <ul class="list-group">
-                <li class="list-group-item"><b>Category:</b> {{ business.category }}</li>
-                <li class="list-group-item"><b>Years in Business:</b> {{ business.years_in_business }}</li>
-                <br/>
-                <li class="list-group-item">{{ business.description }}</li>
-                <br/>
-                <li class="list-group-item"><b>Phone:</b> {{ business.phone }}</li>
-                <li class="list-group-item"><b>Email:</b> {{ business.email }}</li>
-                <li class="list-group-item"><b>Street:</b> {{ business.street_adress }}</li>
-                <li class="list-group-item"><b>City:</b> {{ business.city }}</li>
-                <li class="list-group-item"><b>Zipcode:</b> {{ business.zipcode }}</li>
-              </ul>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <p><b>Company name:</b> {{ business.company }}</p>
+                  <p><b>Category:</b> {{ business.category }}</p>
+                  <p><b>Years in Business:</b> {{ business.years_in_business }}</p>
+                  <p><b>Description:</b></p>
+                  <p>{{ business.description }}</p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <p><b>Email:</b> {{ business.email }}</p>
+                  <p><b>Street:</b> {{ business.street_address }}</p>
+                  <p><b>City:</b> {{ business.city }}</p>
+                  <p><b>Zipcode:</b> {{ business.zipcode }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -38,77 +58,93 @@
     </div>
   </div>
 
+  <!-- edit contact form -->
   <div *ngIf="appState == 'edit'" class="row">
-     <button class="btn btn-default pull-right" (click)="changeState('default')">Go back</button>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <h3>Edit Business</h3>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title pull-left">
+          Edit Contact
+        </h3>
+        <button class="btn btn-danger pull-right" (click)="changeState('default')">Cancel</button>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-body">
+        <form (submit)="updateBusiness()">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label for="">Compa</label>
+                <input type="text" [(ngModel)]="activeCompany" name="activeCompany" class="form-control" #company>
+              </div>
 
-      <form (submit)="updateBusiness()">
-
-        <div class="form-group">
-          <label for="">Compa</label>
-          <input type="text" [(ngModel)]="activeCompany" name="activeCompany" class="form-control" #company>
-        </div>
-
-        <div class="form-group">
-          <label for="">Category</label>
-          <select #category class="form-control" name="activeCategory" [(ngModel)]="activeCategory">
+              <div class="form-group">
+                <label for="">Category</label>
+                <select #category class="form-control" name="activeCategory" [(ngModel)]="activeCategory">
             <option value="0">Select</option>
             <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
           </select>
-        </div>
+              </div>
 
-        <div class="form-group">
-          <label for="">Years in Business</label>
-          <input type="text" [(ngModel)]="activeYears_in_business" name="activeYears_in_business" class="form-control" #years_in_business>
-        </div>
+              <div class="form-group">
+                <label for="">Years in Business</label>
+                <input type="text" [(ngModel)]="activeYears_in_business" name="activeYears_in_business" class="form-control" #years_in_business>
+              </div>
 
-        <div class="form-group">
-          <label for="">Description</label>
-          <input type="text" [(ngModel)]="activeDescription" name="activeDescription" class="form-control" #description>
-        </div>
+              <div class="form-group">
+                <label for="">Description</label>
+                <textarea type="text" [(ngModel)]="activeDescription" name="activeDescription" class="form-control" #description></textarea>
+              </div>
 
-        <div class="form-group">
-          <label for="">Phone</label>
-          <input type="text" [(ngModel)]="activePhone" name="activePhone" class="form-control" #phone>
-        </div>
+              <div class="form-group">
+                <label for="">Phone</label>
+                <input type="text" [(ngModel)]="activePhone" name="activePhone" class="form-control" #phone>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" [(ngModel)]="activeEmail" name="activeEmail" class="form-control" #email>
+              </div>
 
-        <div class="form-group">
-          <label for="">Email</label>
-          <input type="text" [(ngModel)]="activeEmail" name="activeEmail" class="form-control" #email>
-        </div>
+              <div class="form-group">
+                <label for="">Street address</label>
+                <input type="text" [(ngModel)]="activeStreet_address" name="activeStreet_address" class="form-control" #street_address>
+              </div>
 
-        <div class="form-group">
-          <label for="">Street address</label>
-          <input type="text" [(ngModel)]="activeStreet_address" name="activeStreet_address" class="form-control" #street_address>
-        </div>
+              <div class="form-group">
+                <label for="">City</label>
+                <input type="text" [(ngModel)]="activeCity" name="activeCity" class="form-control" #city>
+              </div>
 
-        <div class="form-group">
-          <label for="">City</label>
-          <input type="text" [(ngModel)]="activeCity" name="activeCity" class="form-control" #city>
-        </div>
+              <div class="form-group">
+                <label for="">State</label>
+                <input type="text" [(ngModel)]="activeState" name="activeState" class="form-control" #state>
+              </div>
 
-        <div class="form-group">
-          <label for="">State</label>
-          <input type="text" [(ngModel)]="activeState" name="activeState" class="form-control" #state>
-        </div>
-
-        <div class="form-group">
-          <label for="">Zipcode</label>
-          <input type="text" [(ngModel)]="activeZipcode" name="activeZipcode" class="form-control" #zipcode>
-        </div>
-
-        <button type="submit" class="pull-right btn btn-success btn-md">Save</button>
-      </form>
+              <div class="form-group">
+                <label for="">Zipcode</label>
+                <input type="text" [(ngModel)]="activeZipcode" name="activeZipcode" class="form-control" #zipcode>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="pull-right btn btn-success btn-md">Change</button>
+        </form>
+      </div>
     </div>
   </div>
 
+  <!-- new business form -->
   <div *ngIf="appState == 'add'" class="row">
-     <button class="btn btn-default pull-right" (click)="changeState('default')">Go back</button>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <h3>Add Business</h3>
-
-      <form (submit)="addBusiness(
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h4 class="panel-title pull-left">
+          Add new contact
+        </h4>
+        <button class="btn btn-danger pull-right" (click)="changeState('default')">Cancel</button>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-body">
+        <form (submit)="addBusiness(
         company.value,
         category.value,
         years_in_business.value,
@@ -119,84 +155,71 @@
         city.value,
         state.value,
         zipcode.value)">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label for="">Company</label>
+                <input type="text" class="form-control" #company>
+              </div>
 
-        <div class="form-group">
-          <label for="">Company</label>
-          <input type="text" class="form-control" #company>
-        </div>
+              <div class="form-group">
+                <label for="">Category</label>
+                <select #category class="form-control">
+                  <option value="0">Select</option>
+                  <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
+                </select>
+              </div>
 
-        <div class="form-group">
-          <label for="">Category</label>
-          <select #category class="form-control">
-            <option value="0">Select</option>
-            <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
-          </select>
-        </div>
+              <div class="form-group">
+                <label for="">Years in Business</label>
+                <input type="text" class="form-control" #years_in_business>
+              </div>
 
-        <div class="form-group">
-          <label for="">Years in Business</label>
-          <input type="text" class="form-control" #years_in_business>
-        </div>
+              <div class="form-group">
+                <label for="">Description</label>
+                <textarea type="text" rows="8" cols="50" class="form-control" #description></textarea>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label for="">Phone</label>
+                <input type="text" class="form-control" #phone>
+              </div>
 
-        <div class="form-group">
-          <label for="">Description</label>
-          <input type="text" class="form-control" #description>
-        </div>
+              <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="form-control" #email>
+              </div>
 
-        <div class="form-group">
-          <label for="">Phone</label>
-          <input type="text" class="form-control" #phone>
-        </div>
+              <div class="form-group">
+                <label for="">Street address</label>
+                <input type="text" class="form-control" #street_address>
+              </div>
 
-        <div class="form-group">
-          <label for="">Email</label>
-          <input type="text" class="form-control" #email>
-        </div>
+              <div class="form-group">
+                <label for="">City</label>
+                <input type="text" class="form-control" #city>
+              </div>
 
-        <div class="form-group">
-          <label for="">Street address</label>
-          <input type="text" class="form-control" #street_address>
-        </div>
+              <div class="form-group">
+                <label for="">State</label>
+                <input type="text" class="form-control" #state>
+              </div>
 
-        <div class="form-group">
-          <label for="">City</label>
-          <input type="text" class="form-control" #city>
-        </div>
-
-        <div class="form-group">
-          <label for="">State</label>
-          <input type="text" class="form-control" #state>
-        </div>
-
-        <div class="form-group">
-          <label for="">Zipcode</label>
-          <input type="text" class="form-control" #zipcode>
-        </div>
-
-        <button type="submit" class="pull-right btn btn-success btn-md">Save</button>
-      </form>
-    </div>
-  </div>
-
-
-
-
-  <div class="row" style="margin-top: 20px;">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <button type="button" class="btn btn-primary" (click)="changeState('add')">Add Business</button>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-        <label>Filter Category
-          <select class="form-control" (change)="filterCategory(filteredCategory.value)" #filteredCategory>
-            <option value="0">Select</option>
-            <option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</option>
-          </select>
-        </label>
+              <div class="form-group">
+                <label for="">Zipcode</label>
+                <input type="text" class="form-control" #zipcode>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="pull-right btn btn-success btn-md">Add</button>
+        </form>
       </div>
     </div>
   </div>
 
+
+  <!-- list of all contacts -->
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div *ngIf="businesses">
       <table class="table">
@@ -221,5 +244,5 @@
         </tbody>
       </table>
     </div>
-
   </div>
+</div>

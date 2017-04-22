@@ -52,9 +52,17 @@ export class AppComponent implements OnInit {
   }
 
   filterCategory(category) {
-    this._fs.getBusinesses(category).subscribe(bussineses => {
-      this.businesses = bussineses;
-    });
+    console.log(category);
+    if (category == 0) {
+      this._fs.getBusinesses().subscribe(bussineses => {
+        this.businesses = bussineses;
+      });
+    } else {
+      this._fs.getBusinesses(category).subscribe(bussineses => {
+        this.businesses = bussineses;
+      });
+    }
+
   }
 
   addBusiness(company: string, category: string, years_in_business: string, description: string, phone: string, email: string, street_address: string, city: string, state: string, zipcode: string) {
