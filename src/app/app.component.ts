@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Run the application ...");
+
     this._fs.getBusinesses().subscribe(bussineses => {
       this.businesses = bussineses;
     });
@@ -52,7 +54,6 @@ export class AppComponent implements OnInit {
   }
 
   filterCategory(category) {
-    console.log(category);
     if (category == 0) {
       this._fs.getBusinesses().subscribe(bussineses => {
         this.businesses = bussineses;
@@ -117,7 +118,6 @@ export class AppComponent implements OnInit {
     }
 
     this._fs.updateBusiness(this.activeKey, updBusiness);
-    console.log(updBusiness);
     this.changeState('default', 0);
   }
 
