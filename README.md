@@ -19,6 +19,9 @@ With this app the business contacts can be managed.
 
 ## Built With
 
+
+* [Angular 2+](https://angular.io/)
+* [TypeScript](https://www.typescriptlang.org/)
 * [Angular-cli](https://cli.angular.io/)
 * [Bootstrap](http://getbootstrap.com/)
 * [Angularfire 2](https://github.com/angular/angularfire2)
