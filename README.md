@@ -17,8 +17,21 @@ With this app the business contacts can be managed.
 ### View details
 ![screen shot 2017-04-22 at 5 16 57 pm](https://cloud.githubusercontent.com/assets/6087113/25305656/d35c47f8-277f-11e7-98ce-3f57d02ffbb0.png)
 
-## Built With
+### Run the Application
 
+Install all node_modules
+
+```
+npm install
+```
+
+Run on localhost:4200
+
+```
+ng serve
+```
+
+## Built With
 
 * [Angular 2+](https://angular.io/)
 * [TypeScript](https://www.typescriptlang.org/)
