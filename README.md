@@ -1,6 +1,6 @@
 # Business Contact Angular App with Firebase
 
-
+With this app the business contacts can be managed.
 
 ## Screenshots
 
